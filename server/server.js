@@ -22,7 +22,7 @@ app.get("/person", (req, res) => {
   // Evaluamos si vino una clave "name" y "age" en los query parameters
   if (req.query.name && req.query.age) {
     res.json(personList.filter(item => item.name.toUpperCase().includes(req.query.name.toUpperCase()) && 
-      item.age <= req.query.age));
+      item.age >= req.query.age));
   } else if (req.query.name) {
     // Si vino solo la query name, la usamos para filtrar que "name" contenga ese dato
     // (y usamos el toUpperCase para que no sea case sensitive)
