@@ -1,0 +1,18 @@
+{
+  "name": "express1",
+  "version": "1.0.0",
+  "description": "Primer ejemplo de web server con Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "devstart": "nodemon server/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
