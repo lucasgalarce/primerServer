@@ -27,6 +27,9 @@ app.get("/person", (req, res) => {
     // Si vino solo la query name, la usamos para filtrar que "name" contenga ese dato
     // (y usamos el toUpperCase para que no sea case sensitive)
     res.json(personList.filter(item => item.name.toUpperCase().includes(req.query.name.toUpperCase())));
+  } else if (req.query.age) {
+    // Si vino solo la query age, la usamos para filtrar las personas que son mayores que "age"
+    res.json(personList.filter(item => item.age >= req.query.age));
   } else {
     // Si no vino ningún filtro, retornamos la lista completa (usamos la función .json(...) del
     // objeto response que convierte el objeto a JSON y agrega la cabecera especificando el tipo

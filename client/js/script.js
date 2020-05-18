@@ -13,13 +13,18 @@ btnSearch.addEventListener('click', () => {
   // Pregunto si el input de name esta vacio, si tiene valor lo concateno a la url
   if (nameValue != "") {
     url = `/person?name=${nameValue}`;
+    
+    // Pregunto si el input de minAge esta vacio, si tiene valor lo concateno a la url
+    if(minAge.value != "" && nameValue != ""){
+      url += `&age=${ageValue}`
+    }
+
+  } else if (minAge.value != ""){
+    url = `/person?age=${ageValue}`;
   } else {
     url = "/person"
   }
-  // Pregunto si el input de minAge esta vacio, si tiene valor lo concateno a la url
-  if(minAge.value != ""){
-    url += `&age=${ageValue}`
-  }
+
 
   ajaxRequest.addEventListener("load", function () {
     if (this.status == 200) {
