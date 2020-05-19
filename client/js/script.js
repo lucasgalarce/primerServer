@@ -2,6 +2,7 @@ const name = document.getElementById('name');
 const minAge = document.getElementById('minAge');
 const form = document.getElementById('searchFrom');
 const ulResult = document.getElementById('result');
+const isSensitive = document.getElementById('sensitive');
 
 
 form.addEventListener('submit', ev => {
@@ -10,15 +11,22 @@ form.addEventListener('submit', ev => {
   const ajaxRequest = new XMLHttpRequest();
   const nameValue = name.value.trim();
   const ageValue = minAge.value;
-  let url = "http://localhost:3000/person?";
+    
+  // Pregunto si el checkbox "sensitive" es true o false
+  const caseSensitive = isSensitive.checked ? 'y' : 'n';
+
+  let url = "/person?";
 
   // Pregunto si el input de name esta vacio, si tiene valor lo concateno a la url
   if (nameValue != "") {
     url += `&name=${nameValue}`;
-  }  
+  }
   // Pregunto si el input de number esta vacio, si tiene valor lo concateno a la url
-  if (minAge.value != ""){
-    url = `&age=${ageValue}`;
+  if (minAge.value != "") {
+    url += `&age=${ageValue}`;
+  }
+  if(caseSensitive == 'y'){
+    url += `&caseSensitive=${caseSensitive}`;
   }
 
   ajaxRequest.addEventListener("load", function () {
@@ -34,7 +42,7 @@ form.addEventListener('submit', ev => {
         newLi.textContent = person.name + ", " + person.age;
 
         //Pregunto si es mayor a 1 año para concatener el string "años" u "año"
-        if(person.age > 1){
+        if (person.age > 1) {
           newLi.textContent += " años"
         } else {
           newLi.textContent += " año"

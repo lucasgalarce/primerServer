@@ -19,10 +19,17 @@ app.get("/person", (req, res) => {
   // Consulto las personas de una función local definida más abajo
   const personList = getPersonList();
 
-  // Evaluamos si vino una clave "name" y "age" en los query parameters
-  if (req.query.name && req.query.age) {
-    res.json(personList.filter(item => item.name.toUpperCase().includes(req.query.name.toUpperCase()) && 
+  if (req.query.name && req.query.age && req.query.caseSensitive == 'y') {
+    //Evaluamos si vinieron los tres valores
+    res.json(personList.filter(item => item.name.includes(req.query.name) &&
       item.age >= req.query.age));
+  } else if (req.query.name && req.query.age) {
+    // Evaluamos si vino una clave "name" y "age" en los query parameters
+    res.json(personList.filter(item => item.name.toUpperCase().includes(req.query.name.toUpperCase()) &&
+      item.age >= req.query.age));
+  } else if (req.query.name && req.query.caseSensitive == 'y') {
+    // Evaluamos que venga solo el nombre y el case sensitive
+    res.json(personList.filter(item => item.name.includes(req.query.name)));
   } else if (req.query.name) {
     // Si vino solo la query name, la usamos para filtrar que "name" contenga ese dato
     // (y usamos el toUpperCase para que no sea case sensitive)
