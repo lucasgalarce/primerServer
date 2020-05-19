@@ -7,11 +7,17 @@
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+  <h2>Busqueda</h2>
 
-  <input id="name" type="text" placeholder="Name">
-  <input id="minAge" type="number" placeholder="Min Age">
-  <button id="btnSearch">Buscar</button>
-  <!-- El p tiene un valor inicial, pero si la consulta es muy veloz no se llega a leer -->
+  <form id="searchFrom" action="">
+    <input id="name" type="text" placeholder="Name">
+    <input id="minAge" type="number" placeholder="Min Age">
+
+    <input type="submit" value="Buscar">
+  </form>
+
+  <h2>Resultados</h2>
+
   <ul id="result">
     
   </ul>

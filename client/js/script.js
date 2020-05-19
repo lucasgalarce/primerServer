@@ -1,30 +1,25 @@
 const name = document.getElementById('name');
 const minAge = document.getElementById('minAge');
-const btnSearch = document.getElementById('btnSearch');
+const form = document.getElementById('searchFrom');
 const ulResult = document.getElementById('result');
 
 
-btnSearch.addEventListener('click', () => {
+form.addEventListener('submit', ev => {
+  ev.preventDefault();
+
   const ajaxRequest = new XMLHttpRequest();
   const nameValue = name.value.trim();
   const ageValue = minAge.value;
-  let url = "";
+  let url = "http://localhost:3000/person?";
 
   // Pregunto si el input de name esta vacio, si tiene valor lo concateno a la url
   if (nameValue != "") {
-    url = `/person?name=${nameValue}`;
-    
-    // Pregunto si el input de minAge esta vacio, si tiene valor lo concateno a la url
-    if(minAge.value != "" && nameValue != ""){
-      url += `&age=${ageValue}`
-    }
-
-  } else if (minAge.value != ""){
-    url = `/person?age=${ageValue}`;
-  } else {
-    url = "/person"
+    url += `&name=${nameValue}`;
+  }  
+  // Pregunto si el input de number esta vacio, si tiene valor lo concateno a la url
+  if (minAge.value != ""){
+    url = `&age=${ageValue}`;
   }
-
 
   ajaxRequest.addEventListener("load", function () {
     if (this.status == 200) {
